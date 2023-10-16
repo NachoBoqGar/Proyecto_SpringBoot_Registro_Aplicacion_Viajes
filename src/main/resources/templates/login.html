@@ -5,36 +5,38 @@
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
-<body background="static/img/signpost.jpg">
+<body>
 
-    <div class="container">
-        <h1>Bienvenido a ViajesApp</h1>
+<div class="container">
+    <div div class="login-app-contents">
+        <h1 class="mb-4" align="center">Bienvenido a ViajesApp</h1>
         <form th:action="@{login}" method="post" class="mt-4">
-            <div class="form-group row">
-                <label for="username" class="col-form-label col-sm-3">Nombre de usuario o e-mail</label>
+            <div class="form-group row margenes-elementos-login" >
+                <label for="username" class="col-form-label col-sm-4 label-style" >Nombre de usuario o email</label>
                 <div class="col-sm-8">
                     <input id="username" type="text" class="form-control" name="username" autofocus />
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="password" class="col-form-label col-sm-3">Contraseña</label>
-                <div class="col-sm-8">
+            <div class="form-group row margenes-elementos-login">
+                <label for="password" class="col-form-label col-sm-4 label-style">Contraseña</label>
+                <div class="col-sm-8 ">
                     <input id="password" type="password" class="form-control" name="password" autofocus />
-                    <p class="text-right mt-4 mb-0">
-                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                        <button class="btn btn-link" th:href="@{/registro}">Registrase</button>
+                    <p class="text-right mt-4 mb-0 ">
+                        <button type="submit" class="btn btn-primary margenes-elementos-login">Iniciar sesión</button>
+                        <button class="btn btn-link margenes-elementos-login" th:href="@{/registro}">Registrase</button>
                     </p>
                 </div>
             </div>
-
         </form>
     </div>
+</div>
 
 
-    <!-- Dependneicas de Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Dependneicas de Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </body>
 </html>
