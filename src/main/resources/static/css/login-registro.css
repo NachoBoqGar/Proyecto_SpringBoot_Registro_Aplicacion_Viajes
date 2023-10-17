@@ -5,13 +5,13 @@ body {
     backdrop-filter: blur(5px);
 }
 
-.login-app-contents {
+.app-contents {
 	max-width: 750px;
 	margin: min(20vh, 300px) auto 0;
 	background: rgba(255, 255, 255, 0.5);
 }
 
-.margenes-elementos-login{
+.margenes-elementos{
     margin: 10px
 }
 

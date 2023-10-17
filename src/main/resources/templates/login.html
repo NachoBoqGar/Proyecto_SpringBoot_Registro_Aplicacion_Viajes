@@ -5,27 +5,37 @@
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/login-registro.css}">
 </head>
 <body>
 
 <div class="container">
-    <div div class="login-app-contents">
+    <div div class="app-contents">
         <h1 class="mb-4" align="center">Bienvenido a ViajesApp</h1>
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">
+                Usuario o contraseña incorrectos.
+            </div>
+        </div>
+        <div th:if="${param.logout}">
+            <div class="alert alert-success">
+                Sesión cerrada correctamente.
+            </div>
+        </div>
         <form th:action="@{login}" method="post" class="mt-4">
-            <div class="form-group row margenes-elementos-login" >
+            <div class="form-group row margenes-elementos" >
                 <label for="username" class="col-form-label col-sm-4 label-style" >Nombre de usuario o email</label>
                 <div class="col-sm-8">
                     <input id="username" type="text" class="form-control" name="username" autofocus />
                 </div>
             </div>
-            <div class="form-group row margenes-elementos-login">
+            <div class="form-group row margenes-elementos">
                 <label for="password" class="col-form-label col-sm-4 label-style">Contraseña</label>
                 <div class="col-sm-8 ">
                     <input id="password" type="password" class="form-control" name="password" autofocus />
                     <p class="text-right mt-4 mb-0 ">
-                        <button type="submit" class="btn btn-primary margenes-elementos-login">Iniciar sesión</button>
-                        <button class="btn btn-link margenes-elementos-login" th:href="@{/registro}">Registrase</button>
+                        <button type="submit" class="btn btn-primary margenes-elementos">Iniciar sesión</button>
+                        <button class="btn btn-link margenes-elementos" th:href="@{/registro}">Registrase</button>
                     </p>
                 </div>
             </div>
