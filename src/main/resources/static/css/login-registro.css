@@ -1,0 +1,20 @@
+body {
+    background-image: url('../img/signpost.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(5px);
+}
+
+.app-contents {
+	max-width: 750px;
+	margin: min(20vh, 300px) auto 0;
+	background: rgba(255, 255, 255, 0.5);
+}
+
+.margenes-elementos{
+    margin: 10px
+}
+
+.label-style {
+    font-weight: bold;
+}
