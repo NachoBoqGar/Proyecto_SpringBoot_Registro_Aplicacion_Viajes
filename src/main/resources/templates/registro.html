@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <link rel="stylesheet" href="https://rawcdn.githack.com/select2/select2-bootstrap-theme/8f833863dc3bf5c0d8d7113a8da43acb2c7c7c91/dist/select2-bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/login-registro.css}">
+    <link rel="stylesheet" th:href="@{/css/estilos-globales.css}">
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="app-contents">
+        <h1 class="mb-4" align="center" style="font-size: 50px;">Crear nuevo usuario</h1>
+        <form th:action="@{registro}" th:object="${usuarioAplicacion}" method="post" class="mt-4">
+          <div class="form-group row margenes-elementos">
+            <label for="usuario" class="col-form-label col-sm-4 label-style">Nombre de usuario</label>
+            <div class="col-sm-8">
+              <input id="usuario" type="text" class="form-control" name="usuario"/>
+            </div>
+          </div>
+          <div class="form-group row margenes-elementos">
+            <label for="nombre" class="col-form-label col-sm-4 label-style">Nombre</label>
+            <div class="col-sm-8">
+              <input id="nombre" type="text" class="form-control" name="nombre"/>
+            </div>
+          </div>
+          <div class="form-group row margenes-elementos">
+            <label for="apellidos" class="col-form-label col-sm-4 label-style">Apellidos</label>
+            <div class="col-sm-8">
+              <input id="apellidos" type="text" class="form-control" name="apellidos"/>
+            </div>
+          </div>
+          <div class="form-group row margenes-elementos">
+            <label for="email" class="col-form-label col-sm-4 label-style">Email</label>
+            <div class="col-sm-8">
+              <input id="email" type="email" class="form-control" name="email" />
+            </div>
+          </div>
+          <div class="form-group row margenes-elementos">
+            <label for="country" class="col-form-label col-sm-4 label-style">Pais</label>
+            <div class="col-sm-8">
+              <select class="form-control country-dropdown" id="country" name="country">
+                <option value="">Selecciona un país</option>
+              </select>
+              <input type="hidden" th:field="*{codigoPais}" />
+              <span></span>
+            </div>
+          </div>
+          <div class="form-group row margenes-elementos">
+            <label for="fechaNacimiento" class="col-form-label col-sm-4 label-style">Fecha de Nacimiento</label>
+            <div class="col-sm-8">
+              <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" />
+            </div>
+          </div>
+          <div class="form-group row margenes-elementos">
+            <label for="password" class="col-form-label col-sm-4 label-style">Contraseña</label>
+            <div class="col-sm-8">
+              <input id="password" type="password" class="form-control" name="password" />
+            </div>
+          </div>
+          <div class="form-group row margenes-elementos">
+            <label for="passwordConfirmar" class="col-form-label col-sm-4 label-style">Confirmar contraseña</label>
+            <div class="col-sm-8">
+              <input id="passwordConfirmar" type="password" class="form-control" name="passwordConfirmar"/>
+              <p class="text-right mt-4 mb-0">
+                <button type="submit" class="btn btn-primary margenes-elementos">Registrarse</button>
+                <a class="btn btn-link margenes-elementos" th:href="@{/login}">Cancelar</a>
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bootstrap dependencies -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <script th:inline="javascript">
+
+      $(document).ready(function() {
+        $('.country-dropdown').select2({
+            theme: 'bootstrap',
+            minimumInputLength: 1,
+            ajax: {
+                url: 'http://localhost:8082/apilocalizaciones/paises',
+                dataType: 'json',
+                delay: 250,
+                processResults: function(data) {
+                    return {
+                        results: data.map(pais => ({
+                            id: pais.codigo,
+                            text: pais.nombre
+                        }))
+                    };
+                }
+            },
+            templateResult: formatDropdownItem,
+            templateSelection: formatDropdownItem
+        });
+     });
+
+      function formatDropdownItem(data) {
+          if (!data.id) {
+              return data.text;
+          }
+          return $('<span></span>').append(data.text);
+      }
+    </script>
+
+  </body>
+</html>

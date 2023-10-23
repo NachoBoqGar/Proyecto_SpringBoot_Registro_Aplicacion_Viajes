@@ -1,0 +1,9 @@
+.select2.select2-container {
+	width: 100% !important;
+}
+
+.my-custom-select .select2-container {
+  position: absolute !important;
+  z-index: 1000; /* O ajusta este valor según tus necesidades */
+  /* Otros estilos personalizados */
+}
