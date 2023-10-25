@@ -5,14 +5,13 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 public class UsuarioAplicacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombreusuario;
+    private String nombreUsuario;
     private String nombre;
     private String apellidos;
     @Email
@@ -23,7 +22,7 @@ public class UsuarioAplicacion {
     private String codigoPais;
     private LocalDate fechaNacimiento;
     private LocalDate creado = LocalDate.now();
-    private Boolean admin;
+    private Boolean admin = false;
     /*añadir relacion perfiles seguidos
     @JoinTable(name = "Seguidor",
                joinColumns = @JoinColumn(name = "seguidorId"),
@@ -37,7 +36,7 @@ public class UsuarioAplicacion {
 
     public UsuarioAplicacion(Long id, String nombreusuario, String nombre, String apellidos, String email, String password, String codigoPais, LocalDate fechaNacimiento, LocalDate creado, Boolean admin) {
         this.id = id;
-        this.nombreusuario = nombreusuario;
+        this.nombreUsuario = nombreusuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
@@ -56,12 +55,12 @@ public class UsuarioAplicacion {
         this.id = id;
     }
 
-    public String getNombreusuario() {
-        return nombreusuario;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public void setNombreusuario(String nombreusuario) {
-        this.nombreusuario = nombreusuario;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
     public String getNombre() {

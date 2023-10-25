@@ -13,6 +13,11 @@ public class ConfiguracionSeguridad {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        // Deshabilita la protección CSRF y el encabezado HTTP Strict Transport Security (HSTS) para poder acceder a consola H2 ()
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+
         return http.authorizeHttpRequests()
                 .requestMatchers("/registro").permitAll()
                 .requestMatchers("/css/**").permitAll()
@@ -23,6 +28,8 @@ public class ConfiguracionSeguridad {
                // .and().logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
                // .and().rememberMe()
                 .and().build();
+
+
     }
 
     @Bean
