@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">>
   <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -15,56 +15,73 @@
     <div class="container">
       <div class="app-contents">
         <h1 class="mb-4" align="center" style="font-size: 50px;">Crear nuevo usuario</h1>
-        <form th:action="@{registro}" th:object="${usuarioAplicacion}" method="post" class="mt-4">
+        <form th:action="@{registro}" th:object="${registroUsuarioAplicacion}" method="post" class="mt-4">
+          <div th:if="${error}" class="alert alert-danger">
+            <p th:text="${error}"></p>
+          </div>
+          <div th:if="${#fields.hasErrors('global')}" th:errors="*{global}" class="alert alert-danger">
+            Las contraseñas no coinciden
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           <div class="form-group row margenes-elementos">
             <label for="nombreUsuario" class="col-form-label col-sm-4 label-style">Nombre de usuario</label>
             <div class="col-sm-8">
-              <input id="nombreUsuario" type="text" class="form-control" name="nombreUsuario"/>
+              <input id="nombreUsuario" type="text" class="form-control" th:field="*{nombreUsuario}" th:classappend="${#fields.hasErrors('nombreUsuario')} ? 'is-invalid'"/>
+              <span th:if="${#fields.hasErrors('nombreUsuario')}" th:errors="*{nombreUsuario}" class="invalid-feedback"></span>
             </div>
           </div>
           <div class="form-group row margenes-elementos">
             <label for="nombre" class="col-form-label col-sm-4 label-style">Nombre</label>
             <div class="col-sm-8">
-              <input id="nombre" type="text" class="form-control" name="nombre"/>
+              <input id="nombre" type="text" class="form-control" th:field="*{nombre}" th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid'"/>
+              <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="invalid-feedback"></span>
             </div>
           </div>
           <div class="form-group row margenes-elementos">
             <label for="apellidos" class="col-form-label col-sm-4 label-style">Apellidos</label>
             <div class="col-sm-8">
-              <input id="apellidos" type="text" class="form-control" name="apellidos"/>
+              <input id="apellidos" type="text" class="form-control" th:field="*{apellidos}" th:classappend="${#fields.hasErrors('apellidos')} ? 'is-invalid'"/>
+              <span th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}" class="invalid-feedback"></span>
             </div>
           </div>
           <div class="form-group row margenes-elementos">
             <label for="email" class="col-form-label col-sm-4 label-style">Email</label>
             <div class="col-sm-8">
-              <input id="email" type="email" class="form-control" name="email" />
+              <input id="email" type="email" class="form-control" th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"/>
+              <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></span>
             </div>
           </div>
           <div class="form-group row margenes-elementos">
             <label for="codigoPais" class="col-form-label col-sm-4 label-style">Pais</label>
             <div class="col-sm-8">
-              <select class="form-control country-dropdown" id="codigoPais" name="codigoPais">
-                <option>Selecciona un país</option>
+              <select class="form-control country-dropdown" id="codigoPais" th:field="*{codigoPais}"  th:classappend="${#fields.hasErrors('codigoPais')} ? 'is-invalid'"/>
+                <option></option>
               </select>
+              <span th:if="${#fields.hasErrors('codigoPais')}" th:errors="*{codigoPais}" class="invalid-feedback"></span>
               <span></span>
             </div>
           </div>
           <div class="form-group row margenes-elementos">
             <label for="fechaNacimiento" class="col-form-label col-sm-4 label-style">Fecha de Nacimiento</label>
             <div class="col-sm-8">
-              <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" />
+              <input id="fechaNacimiento" type="date" class="form-control" th:field="*{fechaNacimiento}" th:classappend="${#fields.hasErrors('fechaNacimiento')} ? 'is-invalid'"/>
+              <span th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}" class="invalid-feedback"></span>
             </div>
           </div>
           <div class="form-group row margenes-elementos">
             <label for="password" class="col-form-label col-sm-4 label-style">Contraseña</label>
             <div class="col-sm-8">
-              <input id="password" type="password" class="form-control" name="password" />
+              <input id="password" type="password" class="form-control" th:field="*{password}" th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'"/>
+              <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></span>
             </div>
           </div>
           <div class="form-group row margenes-elementos">
-            <label for="passwordConfirmar" class="col-form-label col-sm-4 label-style">Confirmar contraseña</label>
+            <label for="passwordConfirmacion" class="col-form-label col-sm-4 label-style">Confirmar contraseña</label>
             <div class="col-sm-8">
-              <input id="passwordConfirmar" type="password" class="form-control" name="passwordConfirmar"/>
+              <input id="passwordConfirmacion" type="password" class="form-control" th:field="*{passwordConfirmacion}" th:classappend="${#fields.hasErrors('passwordConfirmacion')} ? 'is-invalid'"/>
+              <span th:if="${#fields.hasErrors('passwordConfirmacion')}" th:errors="*{passwordConfirmacion}" class="invalid-feedback"></span>
               <p class="text-right mt-4 mb-0">
                 <button type="submit" class="btn btn-primary margenes-elementos">Registrarse</button>
                 <a class="btn btn-link margenes-elementos" th:href="@{/login}">Cancelar</a>
@@ -112,6 +129,20 @@
           return $('<span></span>').append(data.text);
       }
     </script>
+
+    //función para no poder establecer unna fecha de nacimiento posterior a la actual
+    <script th:inline="javascript">
+      $(document).ready(function() {
+          var birthDateInput = document.getElementById('fechaNacimiento');
+
+          // Obtén la fecha actual en el formato YYYY-MM-DD
+          var today = new Date().toISOString().slice(0, 10);
+
+          // Establece la fecha máxima en el campo de fecha
+          birthDateInput.setAttribute('max', today);
+      });
+    </script>
+
 
   </body>
 </html>

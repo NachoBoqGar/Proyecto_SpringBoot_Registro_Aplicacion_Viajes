@@ -1,59 +1,35 @@
-package com.app.entities;
+package com.app.dto;
 
-import jakarta.persistence.*;
+import com.app.validation.PasswordMatches;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 
 import java.time.LocalDate;
 
-@Entity
-public class UsuarioAplicacion {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//clase con los campos y restriciones para hacer comprobaciones previas antes de guardar el usuario en la BBDD
+@PasswordMatches
+public class RegistroUsuarioAplicacionDTO {
+
+    @NotBlank
     private String nombreUsuario;
+    @NotBlank
     private String nombre;
+    @NotBlank
     private String apellidos;
     @Email
     @NotEmpty(message = "El email es obligatorio")
     private String email;
     @NotEmpty(message = "La contraseña es obligatoria")
     private String password;
+    @NotEmpty(message = "Es necesario confirmar la contraseña")
+    private String passwordConfirmacion;
+    @NotEmpty(message = "Debes seleccionar un país")
     private String codigoPais;
+    @NotNull(message = "Debes indicar tu fecha de nacimiento")
     private LocalDate fechaNacimiento;
-    private LocalDate creado = LocalDate.now();
-    private Boolean admin;
-    /*añadir relacion perfiles seguidos
-    @JoinTable(name = "Seguidor",
-               joinColumns = @JoinColumn(name = "seguidorId"),
-               inverseJoinColumns = @JoinColumn(name = "seguidoId")
-    )
-    @ManyToMany
-    private Set<Perfil> perfilesSeguidos;*/
-
-    public UsuarioAplicacion() {
-    }
-
-    public UsuarioAplicacion(Long id, String nombreusuario, String nombre, String apellidos, String email, String password, String codigoPais, LocalDate fechaNacimiento, LocalDate creado, Boolean admin) {
-        this.id = id;
-        this.nombreUsuario = nombreusuario;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.email = email;
-        this.password = password;
-        this.codigoPais = codigoPais;
-        this.fechaNacimiento = fechaNacimiento;
-        this.creado = creado;
-        this.admin = admin;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -95,6 +71,14 @@ public class UsuarioAplicacion {
         this.password = password;
     }
 
+    public String getPasswordConfirmacion() {
+        return passwordConfirmacion;
+    }
+
+    public void setPasswordConfirmacion(String passwordConfirmacion) {
+        this.passwordConfirmacion = passwordConfirmacion;
+    }
+
     public String getCodigoPais() {
         return codigoPais;
     }
@@ -111,35 +95,17 @@ public class UsuarioAplicacion {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public LocalDate getCreado() {
-        return creado;
-    }
-
-    public void setCreado(LocalDate creado) {
-        this.creado = creado;
-    }
-
-    public Boolean getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
-    }
-
     @Override
     public String toString() {
-        return "UsuarioAplicacion{" +
-                "id=" + id +
-                ", nombreUsuario='" + nombreUsuario + '\'' +
+        return "RegistroUsuarioAplicacionDTO{" +
+                "nombreUsuario='" + nombreUsuario + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", passwordConfirmacion='" + passwordConfirmacion + '\'' +
                 ", codigoPais='" + codigoPais + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
-                ", creado=" + creado +
-                ", admin=" + admin +
                 '}';
     }
 }
