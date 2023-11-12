@@ -39,7 +39,7 @@ public class RegistroService {
         return usuarioAplicacionRepository.findByEmail(usuarioAplicacionDTO.getEmail()).isPresent();
     }
 
-    //metodo para guardar el usuario con los campos prsentes en la BBDD
+    //metodo para guardar el usuario con los campos presentes en la BBDD
     public UsuarioAplicacion adaptarUsuario(RegistroUsuarioAplicacionDTO usuarioAplicacionDTO){
         UsuarioAplicacion usuarioAplicacion = new UsuarioAplicacion();
         usuarioAplicacion.setNombreUsuario(usuarioAplicacionDTO.getNombreUsuario());

@@ -32,7 +32,7 @@ public class UserDetails implements UserDetailsService {
         //Lanzamos excepción si el usuario no se encuentra
         UsuarioAplicacion usuarioAplicacion = usuario.orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
 
-        //añadimos ROLE_USER y ademais ROLE_ADMIN en caso de que lo sea
+        //añadimos ROLE_USER y además ROLE_ADMIN en caso de que lo sea
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(ROLE_USER));
         if (usuario.get().getAdmin()) {
